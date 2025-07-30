@@ -1,68 +1,293 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Dapatkan uang secara pasif hanya dengan membuka halaman ini. Powered by PropellerAds."/>
-  <meta name="keywords" content="uang online, monetisasi, propellerads, website penghasil uang"/>
-  <meta name="author" content="Nabila Ads"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nabila Tasking Official</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <title>Website Penghasil Uang</title>
-
-  <!-- Favicon -->
-  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1170/1170576.png" type="image/png">
-
-  <!-- Styling -->
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
-      color: #fff;
-      margin: 0;
-      padding: 0;
-    }
-    .container {
-      padding: 60px 20px;
-    }
-    h1 {
-      font-size: 2.5em;
-      margin-bottom: 10px;
-    }
-    p {
-      font-size: 1.1em;
-      margin-bottom: 30px;
-    }
-    a.button {
-      background: #00c853;
-      color: white;
-      padding: 15px 30px;
-      border-radius: 5px;
-      text-decoration: none;
-      font-size: 1.2em;
-      transition: 0.3s;
-    }
-    a.button:hover {
-      background: #00e676;
-    }
-    footer {
-      margin-top: 40px;
-      font-size: 0.9em;
-      color: #aaa;
-    }
-  </style>
+    <style>
+        :root {
+            --primary-color: #4f46e5; --primary-light: #e0e7ff; --secondary-color: #10b981;
+            --background-color: #f3f4f6; --card-bg: #ffffff; --text-dark: #111827;
+            --text-light: #6b7280; --border-color: #e5e7eb; --danger-color: #ef4444;
+        }
+        body { font-family: 'Inter', sans-serif; margin: 0; background-color: var(--background-color); }
+        #subscribe-gate {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(17, 24, 39, 0.8);
+            backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 2000; padding: 1rem; box-sizing: border-box;
+        }
+        .gate-content { background: var(--card-bg); padding: 2.5rem; border-radius: 1rem; text-align: center; max-width: 400px; }
+        .gate-content h2 { margin-top: 0; color: var(--text-dark); }
+        .gate-content p { color: var(--text-light); }
+        #subscribe-btn, #continue-btn {
+            display: block; width: 100%; padding: 1rem; margin-top: 1rem; border: none; border-radius: 0.5rem;
+            font-size: 1rem; font-weight: 600; cursor: pointer; transition: transform 0.2s;
+        }
+        #subscribe-btn { background-color: #FF0000; color: white; }
+        #continue-btn { background-color: var(--primary-color); color: white; }
+        .hidden { display: none !important; }
+        .app-header {
+            background-color: var(--card-bg); padding: 1rem 1.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .app-header h1 { font-size: 1.25rem; margin: 0; color: var(--primary-color); font-weight: 700; }
+        .profile-summary { text-align: right; }
+        .profile-name { font-weight: 600; color: var(--text-dark); }
+        .profile-balance { font-size: 1.1rem; font-weight: 700; color: var(--secondary-color); }
+        main { padding: 1.5rem; }
+        .task-list-container h2 { margin-top: 0; }
+        .task-card {
+            background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 0.75rem;
+            padding: 1rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem;
+        }
+        .task-icon { font-size: 1.5rem; flex-shrink: 0; }
+        .task-details { flex-grow: 1; }
+        .task-title { font-weight: 600; color: var(--text-dark); }
+        .task-reward { color: var(--secondary-color); font-weight: 500; font-size: 0.9rem; }
+        .task-action button {
+            border: none; background-color: var(--primary-color); color: white; padding: 0.6rem 1rem;
+            border-radius: 0.5rem; cursor: pointer; font-weight: 500;
+        }
+        .task-action button:disabled { background-color: #9ca3af; cursor: not-allowed; }
+        .wd-section { background-color: var(--card-bg); padding: 1.5rem; border-radius: 0.75rem; text-align: center; margin-top: 2rem; }
+        #request-wd-btn {
+            background-color: var(--secondary-color); color: white; border: none; padding: 1rem 2rem;
+            font-size: 1.1rem; font-weight: 600; border-radius: 0.75rem; cursor: pointer;
+        }
+        #request-wd-btn:disabled { background-color: #6ee7b7; color: #d1fae5; cursor: not-allowed; }
+        .wd-info { font-size: 0.9rem; color: var(--text-light); margin-top: 1rem; }
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(17, 24, 39, 0.8);
+            backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 1000;
+        }
+        .modal-content { background: var(--card-bg); padding: 2rem; border-radius: 1rem; width: 90%; max-width: 450px; }
+        .modal-content h3 { margin-top: 0; }
+        .form-group { margin-bottom: 1rem; }
+        label { display: block; font-weight: 500; margin-bottom: 0.5rem; }
+        input[type="text"], input[type="tel"], input[type="number"] {
+            width: 100%; padding: 0.75rem; box-sizing: border-box; border: 1px solid var(--border-color); border-radius: 0.5rem;
+        }
+        .modal-content .info {
+            font-size: 0.8rem; color: var(--text-light); background-color: var(--background-color); padding: 0.75rem;
+            border-radius: 0.5rem; margin-top: 1rem; border-left: 4px solid var(--danger-color);
+        }
+        .modal-actions { display: flex; gap: 1rem; margin-top: 1.5rem; }
+        .modal-actions button { flex-grow: 1; padding: 0.8rem; border-radius: 0.5rem; font-weight: 600; border: 1px solid transparent; cursor: pointer; }
+        #submit-wd-btn { background-color: var(--primary-color); color: white; }
+        #cancel-wd-btn { background-color: transparent; border-color: var(--border-color); color: var(--text-dark); }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Selamat Datang di Web Penghasil Uang!</h1>
-    <p>Buka halaman ini & bantu kami menghasilkan uang dari iklan. Klik tombol di bawah untuk dukung kami 👇</p>
-    <a href="https://otieu.com/4/9622313" class="button" target="_blank">Dukung & Dapatkan Bonus</a>
-    <footer>
-      &copy; 2025 by Nabila. Powered by PropellerAds.
-    </footer>
-  </div>
+    <div id="subscribe-gate">
+        <div class="gate-content">
+            <h2>Selamat Datang!</h2>
+            <p>Subscribe channel Developer untuk membuka akses ke semua tugas dan fitur. Dukungan Anda sangat berarti!</p>
+            <button id="subscribe-btn">Buka & Subscribe Channel</button>
+            <button id="continue-btn">Saya Sudah Subscribe, Lanjutkan</button>
+        </div>
+    </div>
 
-  <!-- Script Iklan Popunder / OnClick -->
-  <script async src="https://propu.sh/pfe/current/tag.min.js?z=9622313" data-cfasync="false"></script>
+    <div id="app-content" class="hidden">
+        <header class="app-header">
+            <h1>Nabila Tasking Official</h1>
+            <div class="profile-summary">
+                <div id="profile-name" class="profile-name"></div>
+                <div id="profile-balance" class="profile-balance"></div>
+            </div>
+        </header>
+
+        <main>
+            <div class="task-list-container">
+                <h2>Tugas Harian</h2>
+                <div id="task-list"></div>
+            </div>
+            <div class="wd-section">
+                <button id="request-wd-btn">Request Penarikan Dana (WD)</button>
+                <div class="wd-info" id="wd-info-text"></div>
+            </div>
+        </main>
+    </div>
+
+    <div id="wd-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h3>Formulir Penarikan Dana</h3>
+            <form id="wd-form">
+                <div class="form-group"><label for="wd-name">Nama Lengkap (Sesuai E-Wallet)</label><input type="text" id="wd-name" required placeholder="Contoh: Budi Santoso"></div>
+                <div class="form-group"><label for="wd-payment-number">Nomor GoPay / DANA</label><input type="tel" id="wd-payment-number" required placeholder="Contoh: 08123456789"></div>
+                <div class="form-group"><label for="wd-amount">Jumlah Penarikan (IDR)</label><input type="number" id="wd-amount" required readonly></div>
+                <div class="info"><strong>Penting:</strong> Estimasi pengiriman saldo adalah 3 - 7 hari kerja. Tim kami akan mereview pengerjaan tugas Anda untuk memastikan semua sesuai ketentuan.</div>
+                <div class="modal-actions"><button type="button" id="cancel-wd-btn">Batal</button><button type="submit" id="submit-wd-btn">Ajukan via WhatsApp</button></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const subscribeGate = document.getElementById('subscribe-gate');
+        const subscribeBtn = document.getElementById('subscribe-btn');
+        const continueBtn = document.getElementById('continue-btn');
+        const appContent = document.getElementById('app-content');
+        const profileNameEl = document.getElementById('profile-name');
+        const profileBalanceEl = document.getElementById('profile-balance');
+        const taskListEl = document.getElementById('task-list');
+        const requestWdBtn = document.getElementById('request-wd-btn');
+        const wdInfoText = document.getElementById('wd-info-text');
+        const wdModal = document.getElementById('wd-modal');
+        const wdForm = document.getElementById('wd-form');
+        const cancelWdBtn = document.getElementById('cancel-wd-btn');
+        const wdAmountInput = document.getElementById('wd-amount');
+
+        const YOUR_YOUTUBE_CHANNEL_URL = "https://youtube.com/@nabilaahmad37?si=DFo0Q32OpT_q-1Ag";
+        const ADMIN_WHATSAPP_NUMBER = "6285810526151";
+        const MINIMUM_WD_AMOUNT = 100000;
+
+        const availableTasks = [
+            { id: 101, icon: '🔔', title: 'Subscribe Channel Utama', reward: 200, link: 'https://youtube.com/@nabilaahmad37?si=DFo0Q32OpT_q-1Ag' },
+            { id: 102, icon: '🔔', title: 'Subscribe Channel Musik', reward: 200, link: 'https://youtu.be/44rsCL2EHJw?si=EIELkPbpSZd2K9ph' },
+            { id: 103, icon: '👍', title: 'Like Video Musik', reward: 100, link: 'https://youtu.be/44rsCL2EHJw?si=O37IKK0_--DwjWTJ' },
+            { id: 104, icon: '👍', title: 'Like Playlist Musik', reward: 200, link: 'https://youtube.com/playlist?list=OLAK5uy_lHuRVZMuVd3JSjOc9aDfwVWQhKTrY0nwU&si=V7PQLuoeynGcYIGe' },
+            { id: 105, icon: '👀', title: 'Tonton Video #1', reward: 500, link: 'https://youtu.be/ovtfUmmI7Jw?si=1POe5aLYJJVml6hL' },
+            { id: 106, icon: '👀', title: 'Tonton Video #2', reward: 500, link: 'https://youtu.be/8UHbYcQ-7i8?si=0LhZ4hK0EiAcbGOy' },
+            { id: 107, icon: '👀', title: 'Tonton Video #3', reward: 500, link: 'https://youtube.com/shorts/zD37pkx-yQI?si=p1rlpy7P1Amui4-t' },
+            { id: 108, icon: '👀', title: 'Tonton Video #4', reward: 500, link: 'https://youtube.com/shorts/5qwV_eyxMMc?si=y8tzHjivf7-SQtRl' },
+            { id: 109, icon: '👀', title: 'Tonton Video #5', reward: 500, link: 'https://youtube.com/shorts/jdPDLkDMA48?si=WM3tn878UOIvbV31' },
+            { id: 110, icon: '👀', title: 'Tonton Video #6', reward: 500, link: 'https://youtube.com/shorts/lreJMSzZe9s?si=XePrw-Os5YVGVxkC' },
+            { id: 111, icon: '👀', title: 'Tonton Video #7', reward: 500, link: 'https://youtube.com/shorts/pEj8HCr-8qo?si=I2F-XMqT37o7N86_' },
+            { id: 112, icon: '👀', title: 'Tonton Video #8', reward: 500, link: 'https://youtube.com/shorts/Uc_cIhb9q44?si=JV3illTS4stcASRU' },
+            { id: 113, icon: '👀', title: 'Tonton Video #9', reward: 500, link: 'https://youtube.com/shorts/7MGsLhPD1ms?si=ERdB9VyTCg7wVvn1' },
+            { id: 114, icon: '👀', title: 'Tonton Video #10', reward: 500, link: 'https://youtube.com/shorts/kR8Oz7mU8cA?si=lQbGTrxix7Tnum0A' },
+            { id: 115, icon: '👀', title: 'Tonton Video #11', reward: 500, link: 'https://youtube.com/shorts/OUj5lnqwuVc?si=geZw_PBE7XtjxKpD' },
+            { id: 116, icon: '👀', title: 'Tonton Video #12', reward: 500, link: 'https://youtube.com/shorts/gT_fM1hQOaE?si=mdR3sAfbJAkNe-VL' },
+            { id: 201, icon: '👍', title: 'Follow Facebook Profile #1', reward: 200, link: 'https://www.facebook.com/profile.php?id=61565017914914' },
+            { id: 202, icon: '👍', title: 'Follow Facebook Profile #2', reward: 200, link: 'https://www.facebook.com/profile.php?id=61573453640541' },
+            { id: 203, icon: '💬', title: 'Join Grup Facebook #1', reward: 300, link: 'https://facebook.com/groups/1336365637465217/' },
+            { id: 204, icon: '💬', title: 'Join Grup Facebook #2', reward: 300, link: 'https://facebook.com/groups/343909018736284/' },
+            { id: 205, icon: '💬', title: 'Join Grup Facebook #3', reward: 300, link: 'https://facebook.com/groups/1842973219119770/' },
+            { id: 301, icon: '✍️', title: 'Masukan Kode Refferal Soniva', reward: 200, special_action: 'referral', referral_code: 'SONIVA-4SJSS', link: 'https://soniva.go.link/cNODt' },
+            { id: 302, icon: '🔑', title: 'Beli Kunci Premium Studio AI', reward: 25000, link: 'https://studio-ai-premium-v-3-a.vercel.app/' }
+        ];
+
+        let user = JSON.parse(localStorage.getItem('nabilaUserProfile')) || {
+            name: "Pengguna " + Math.floor(1000 + Math.random() * 9000),
+            balance: 0,
+            completedTaskIds: []
+        };
+        
+        const saveUser = () => localStorage.setItem('nabilaUserProfile', JSON.stringify(user));
+        const formatRupiah = (number) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(number);
+
+        const updateUI = () => {
+            profileNameEl.textContent = user.name;
+            profileBalanceEl.textContent = formatRupiah(user.balance);
+            requestWdBtn.disabled = user.balance < MINIMUM_WD_AMOUNT;
+            wdInfoText.textContent = `Minimal penarikan adalah ${formatRupiah(MINIMUM_WD_AMOUNT)}. Saldo Anda: ${formatRupiah(user.balance)}`;
+            renderTasks();
+        };
+
+        const renderTasks = () => {
+            taskListEl.innerHTML = '';
+            availableTasks.forEach(task => {
+                const isCompleted = user.completedTaskIds.includes(task.id);
+                const taskCard = document.createElement('div');
+                taskCard.className = 'task-card';
+                taskCard.innerHTML = `
+                    <div class="task-icon">${task.icon}</div>
+                    <div class="task-details">
+                        <div class="task-title">${task.title}</div>
+                        <div class="task-reward">+ ${formatRupiah(task.reward)}</div>
+                    </div>
+                    <div class="task-action">
+                        <button data-task-id="${task.id}" data-link="${task.link || ''}" data-special-action="${task.special_action || ''}" data-referral-code="${task.referral_code || ''}" ${isCompleted ? 'disabled' : ''}>
+                            ${isCompleted ? 'Selesai' : 'Kerjakan'}
+                        </button>
+                    </div>
+                `;
+                taskListEl.appendChild(taskCard);
+            });
+        };
+
+        const completeTask = (taskId) => {
+            if (user.completedTaskIds.includes(taskId)) return;
+            const task = availableTasks.find(t => t.id === taskId);
+            if(task) {
+                user.balance += task.reward;
+                user.completedTaskIds.push(taskId);
+                saveUser();
+                updateUI();
+                alert(`SELAMAT!\n\nTugas "${task.title}" selesai. Saldo Anda bertambah ${formatRupiah(task.reward)}.`);
+            }
+        };
+
+        if (localStorage.getItem('nabilaHasSubscribed')) {
+            subscribeGate.classList.add('hidden');
+            appContent.classList.remove('hidden');
+        }
+
+        subscribeBtn.addEventListener('click', () => window.open(YOUR_YOUTUBE_CHANNEL_URL, '_blank'));
+        continueBtn.addEventListener('click', () => {
+            localStorage.setItem('nabilaHasSubscribed', 'true');
+            subscribeGate.classList.add('hidden');
+            appContent.classList.remove('hidden');
+        });
+
+        taskListEl.addEventListener('click', (e) => {
+            if (e.target.tagName === 'BUTTON') {
+                const button = e.target;
+                const taskId = parseInt(button.dataset.taskId);
+                const link = button.dataset.link;
+                const specialAction = button.dataset.specialAction;
+                
+                if (specialAction === 'referral') {
+                    const referralCode = button.dataset.referralCode;
+                    const promptMessage = `Kunjungi link ini, lalu masukan kode referral berikut:\n\n${referralCode}\n\nKlik OK jika Anda sudah menyalin kode dan siap membuka link.`;
+                    if (confirm(promptMessage)) {
+                        window.open(link, '_blank');
+                        setTimeout(() => {
+                           const userInput = prompt("Untuk verifikasi, masukan kembali kode referral yang Anda gunakan:");
+                           if (userInput && userInput.trim().toUpperCase() === referralCode.toUpperCase()) {
+                               completeTask(taskId);
+                           } else {
+                               alert('Kode referral tidak cocok. Tugas belum selesai.');
+                           }
+                        }, 1000);
+                    }
+                } else {
+                    if (link) window.open(link, '_blank');
+                    setTimeout(() => completeTask(taskId), 500);
+                }
+            }
+        });
+
+        requestWdBtn.addEventListener('click', () => {
+            if (user.balance >= MINIMUM_WD_AMOUNT) {
+                wdAmountInput.value = user.balance;
+                wdModal.classList.remove('hidden');
+            } else {
+                alert(`Saldo Anda belum mencukupi. Anda butuh ${formatRupiah(MINIMUM_WD_AMOUNT - user.balance)} lagi untuk bisa melakukan penarikan.`);
+            }
+        });
+        cancelWdBtn.addEventListener('click', () => wdModal.classList.add('hidden'));
+
+        wdForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('wd-name').value;
+            const number = document.getElementById('wd-payment-number').value;
+            const amount = parseInt(wdAmountInput.value);
+
+            const message = `Halo Admin Nabila Tasking Official,\n\nSaya ingin mengajukan penarikan dana:\n-----------------------------------\n*Nama Pengguna:* ${user.name}\n*Nama E-Wallet:* ${name}\n*Nomor GoPay/DANA:* ${number}\n*Jumlah Penarikan:* ${formatRupiah(amount)}\n-----------------------------------\n\nMohon untuk segera direview dan diproses. Terima kasih.`;
+            const whatsappURL = `https://wa.me/${ADMIN_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+            
+            window.open(whatsappURL, '_blank');
+            alert('Anda akan diarahkan ke WhatsApp. Saldo Anda akan dipotong setelah admin melakukan verifikasi.');
+            wdModal.classList.add('hidden');
+            wdForm.reset();
+        });
+
+        updateUI();
+    });
+    </script>
 </body>
 </html>
