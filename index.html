@@ -153,9 +153,9 @@
         <aside class="sidebar" id="sidebar">
              <div class="sidebar-header"><h2>Nabila Tasking</h2></div>
              <nav class="sidebar-nav">
-                 <a href="#tugas-utama" class="nav-link active"><!-- ... SVG Icon ... --> Tugas Utama</a>
-                 <a href="#tugas-afiliasi" class="nav-link"><!-- ... SVG Icon ... --> Tugas Afiliasi</a>
-                 <a href="#" id="nav-withdraw-btn"><!-- ... SVG Icon ... --> Penarikan Dana</a>
+                <a href="#tugas-utama" class="nav-link active"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.898 20.572L16.5 21.75l-.398-1.178a3.375 3.375 0 00-2.455-2.456L12.75 18l1.178-.398a3.375 3.375 0 002.455-2.456L16.5 14.25l.398 1.178a3.375 3.375 0 002.456 2.456L20.25 18l-1.178.398a3.375 3.375 0 00-2.456 2.456z" /></svg> Tugas Utama</a>
+                <a href="#tugas-afiliasi" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c.51 0 .962-.343 1.087-.835l1.838-5.513a1.875 1.875 0 00-1.087-2.336l-5.054-1.685a1.875 1.875 0 00-2.336 1.087l-1.838 5.513M3.375 10.5h11.218c.51 0 .962-.343 1.087-.835l.383-1.437M3.375 10.5l-1.5-5.25h-1.5" /></svg> Tugas Afiliasi</a>
+                <a href="#" id="nav-withdraw-btn"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /></svg> Penarikan Dana</a>
              </nav>
              <div class="sidebar-footer">© 2025 Nabila Ahmad</div>
         </aside>
@@ -200,46 +200,74 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // --- DEFINISI SEMUA ELEMEN ---
         const elements = {
-            subscribeGate: document.getElementById('subscribe-gate'),
-            appWrapper: document.getElementById('app-wrapper'),
-            sidebar: document.getElementById('sidebar'),
-            profileName: document.getElementById('profile-name'),
-            profileBalance: document.getElementById('profile-balance'),
-            utamaContainer: document.getElementById('task-list-utama'),
-            afiliasiContainer: document.getElementById('task-list-afiliasi'),
-            wdInfoText: document.getElementById('wd-info-text'),
-            wdProgressBar: document.getElementById('wd-progress-bar'),
-            requestWdBtn: document.getElementById('request-wd-btn'),
-            wdModal: document.getElementById('wd-modal'),
-            wdForm: document.getElementById('wd-form'),
-            wdAmountInput: document.getElementById('wd-amount'),
+            subscribeGate: document.getElementById('subscribe-gate'), subscribeBtn: document.getElementById('subscribe-btn'),
+            continueBtn: document.getElementById('continue-btn'), appWrapper: document.getElementById('app-wrapper'),
+            sidebar: document.getElementById('sidebar'), menuToggle: document.getElementById('menu-toggle'),
+            profileName: document.getElementById('profile-name'), profileBalance: document.getElementById('profile-balance'),
+            utamaContainer: document.getElementById('task-list-utama'), afiliasiContainer: document.getElementById('task-list-afiliasi'),
+            wdInfoText: document.getElementById('wd-info-text'), wdProgressBar: document.getElementById('wd-progress-bar'),
+            requestWdBtn: document.getElementById('request-wd-btn'), navWithdrawBtn: document.getElementById('nav-withdraw-btn'),
+            wdModal: document.getElementById('wd-modal'), wdForm: document.getElementById('wd-form'),
+            wdAmountInput: document.getElementById('wd-amount'), cancelWdBtn: document.getElementById('cancel-wd-btn'),
         };
 
         const config = {
             youtubeChannel: "https://youtube.com/@nabilaahmad37?si=DFo0Q32OpT_q-1Ag",
-            whatsappAdmin: "6285810526151",
-            minWd: 100000,
+            whatsappAdmin: "6285810526151", minWd: 100000,
         };
         
-        const availableTasks = [
-             { id: 101, category: 'utama', icon: '🔔', title: 'Subscribe Channel Utama', reward: 200, link: config.youtubeChannel },
-             { id: 302, category: 'utama', icon: '🔑', title: 'Beli Kunci Premium Studio AI', reward: 25000, link: 'https://studio-ai-premium-v-3-a.vercel.app/' },
-             { id: 301, category: 'utama', icon: '✍️', title: 'Masukan Kode Refferal Soniva', reward: 200, special_action: 'referral', referral_code: 'SONIVA-4SJSS', link: 'https://soniva.go.link/cNODt' },
-             { id: 201, category: 'utama', icon: '👍', title: 'Follow Facebook Profile #1', reward: 200, link: 'https://www.facebook.com/profile.php?id=61565017914914' },
-             { id: 203, category: 'utama', icon: '💬', title: 'Join Grup Facebook #1', reward: 300, link: 'https://facebook.com/groups/1336365637465217/' },
-             { id: 401, category: 'afiliasi', icon: '🌶️', title: 'Makaroni Cikruh Pedas Gurih', reward: 1000, link: 'https://s.shopee.co.id/AUjQDkEx5M' },
-             { id: 402, category: 'afiliasi', icon: '🍲', title: 'BASO ACI GURIH KHAS GARUT', reward: 1000, link: 'https://s.shopee.co.id/AKQ01RFaQL' },
-             { id: 403, category: 'afiliasi', icon: '👟', title: 'Sepatu Joging Running', reward: 1000, link: 'https://s.shopee.co.id/AA6Zp8GDlK' },
-             { id: 404, category: 'afiliasi', icon: '🧼', title: 'SABUN MANDI Cair 1 Liter', reward: 1000, link: 'https://s.shopee.co.id/9zn9cpGr6J' }
+        const allTasks = [
+            { id: 101, category: 'utama', icon: '🔔', title: 'Subscribe Channel Utama', reward: 200, link: 'https://youtube.com/@nabilaahmad37?si=DFo0Q32OpT_q-1Ag' },
+            { id: 102, category: 'utama', icon: '🔔', title: 'Subscribe Channel Musik', reward: 200, link: 'https://youtu.be/44rsCL2EHJw?si=EIELkPbpSZd2K9ph' },
+            { id: 103, category: 'utama', icon: '👍', title: 'Like Video Musik', reward: 100, link: 'https://youtu.be/44rsCL2EHJw?si=O37IKK0_--DwjWTJ' },
+            { id: 104, category: 'utama', icon: '👍', title: 'Like Playlist Musik', reward: 200, link: 'https://youtube.com/playlist?list=OLAK5uy_lHuRVZMuVd3JSjOc9aDfwVWQhKTrY0nwU&si=V7PQLuoeynGcYIGe' },
+            { id: 105, category: 'utama', icon: '👀', title: 'Tonton Video #1', reward: 500, link: 'https://youtu.be/ovtfUmmI7Jw?si=1POe5aLYJJVml6hL' },
+            { id: 106, category: 'utama', icon: '👀', title: 'Tonton Video #2', reward: 500, link: 'https://youtu.be/8UHbYcQ-7i8?si=0LhZ4hK0EiAcbGOy' },
+            { id: 107, category: 'utama', icon: '👀', title: 'Tonton Video #3', reward: 500, link: 'https://youtube.com/shorts/zD37pkx-yQI?si=p1rlpy7P1Amui4-t' },
+            { id: 108, category: 'utama', icon: '👀', title: 'Tonton Video #4', reward: 500, link: 'https://youtube.com/shorts/5qwV_eyxMMc?si=y8tzHjivf7-SQtRl' },
+            { id: 109, category: 'utama', icon: '👀', title: 'Tonton Video #5', reward: 500, link: 'https://youtube.com/shorts/jdPDLkDMA48?si=WM3tn878UOIvbV31' },
+            { id: 110, category: 'utama', icon: '👀', title: 'Tonton Video #6', reward: 500, link: 'https://youtube.com/shorts/lreJMSzZe9s?si=XePrw-Os5YVGVxkC' },
+            { id: 111, category: 'utama', icon: '👀', title: 'Tonton Video #7', reward: 500, link: 'https://youtube.com/shorts/pEj8HCr-8qo?si=I2F-XMqT37o7N86_' },
+            { id: 112, category: 'utama', icon: '👀', title: 'Tonton Video #8', reward: 500, link: 'https://youtube.com/shorts/Uc_cIhb9q44?si=JV3illTS4stcASRU' },
+            { id: 113, category: 'utama', icon: '👀', title: 'Tonton Video #9', reward: 500, link: 'https://youtube.com/shorts/7MGsLhPD1ms?si=ERdB9VyTCg7wVvn1' },
+            { id: 114, category: 'utama', icon: '👀', title: 'Tonton Video #10', reward: 500, link: 'https://youtube.com/shorts/kR8Oz7mU8cA?si=lQbGTrxix7Tnum0A' },
+            { id: 115, category: 'utama', icon: '👀', title: 'Tonton Video #11', reward: 500, link: 'https://youtube.com/shorts/OUj5lnqwuVc?si=geZw_PBE7XtjxKpD' },
+            { id: 116, category: 'utama', icon: '👀', title: 'Tonton Video #12', reward: 500, link: 'https://youtube.com/shorts/gT_fM1hQOaE?si=mdR3sAfbJAkNe-VL' },
+            { id: 201, category: 'utama', icon: '👍', title: 'Follow Facebook Profile #1', reward: 200, link: 'https://www.facebook.com/profile.php?id=61565017914914' },
+            { id: 202, category: 'utama', icon: '👍', title: 'Follow Facebook Profile #2', reward: 200, link: 'https://www.facebook.com/profile.php?id=61573453640541' },
+            { id: 203, category: 'utama', icon: '💬', title: 'Join Grup Facebook #1', reward: 300, link: 'https://facebook.com/groups/1336365637465217/' },
+            { id: 204, category: 'utama', icon: '💬', title: 'Join Grup Facebook #2', reward: 300, link: 'https://facebook.com/groups/343909018736284/' },
+            { id: 205, category: 'utama', icon: '💬', title: 'Join Grup Facebook #3', reward: 300, link: 'https://facebook.com/groups/1842973219119770/' },
+            { id: 301, category: 'utama', icon: '✍️', title: 'Masukan Kode Refferal Soniva', reward: 200, special_action: 'referral', referral_code: 'SONIVA-4SJSS', link: 'https://soniva.go.link/cNODt' },
+            { id: 302, category: 'utama', icon: '🔑', title: 'Beli Kunci Premium Studio AI', reward: 25000, link: 'https://studio-ai-premium-v-3-a.vercel.app/' },
+            { id: 501, category: 'afiliasi', icon: '🍤', title: 'PROMO MIX TERI BAWANG GORENG', reward: 1000, link: 'https://s.shopee.co.id/gFUYtroiB' },
+            { id: 502, category: 'afiliasi', icon: '🍲', title: 'BASO ACI AYAM SUIR GURIH', reward: 1000, link: 'https://s.shopee.co.id/Vw4MasS3A' },
+            { id: 503, category: 'afiliasi', icon: '🐟', title: 'Keripik Kulit Ikan PATIN BBQ', reward: 1000, link: 'https://s.shopee.co.id/LceAHt5O9' },
+            { id: 504, category: 'afiliasi', icon: '🍜', title: 'Baso Aci Termurah Ayam Suwir', reward: 1000, link: 'https://s.shopee.co.id/BJDxytij8' },
+            { id: 505, category: 'afiliasi', icon: '📱', title: 'Stand Holder Phone Kelinci Cute', reward: 1000, link: 'https://s.shopee.co.id/znlfuM47' },
+            { id: 506, category: 'afiliasi', icon: '🌶️', title: 'BASRENG Pedas Daun Jeruk 500GR', reward: 1000, link: 'https://s.shopee.co.id/2Vh8kGkpzc' },
+            { id: 507, category: 'afiliasi', icon: '🧴', title: 'Parfum Laundry 1 Liter', reward: 1000, link: 'https://s.shopee.co.id/2LNiXxlTKb' },
+            { id: 508, category: 'afiliasi', icon: '💨', title: 'GOOJODOQ Mini kipas Strong Wind', reward: 1000, link: 'https://s.shopee.co.id/2B4ILem6fa' },
+            { id: 509, category: 'afiliasi', icon: '🌶️', title: 'PROMO 2 BKS SAMBEL CUMI PETE', reward: 1000, link: 'https://s.shopee.co.id/20ks9Lmk0Z' },
+            { id: 510, category: 'afiliasi', icon: '🧼', title: 'SABUN MANDI LIQUID PUMP 500ML', reward: 1000, link: 'https://s.shopee.co.id/1qRRx2nNLY' },
+            { id: 511, category: 'afiliasi', icon: '🇮🇩', title: 'Jersey Merah Putih 17 Agustus', reward: 1000, link: 'https://s.shopee.co.id/1g81kjo0gX' },
+            { id: 512, category: 'afiliasi', icon: '🌶️', title: 'PROMO 2 BKS SAMBEL CUMI JENGKOL', reward: 1000, link: 'https://s.shopee.co.id/1VobYQoe1W' },
+            { id: 513, category: 'afiliasi', icon: '🐰', title: 'Tumbler Jepang + Gantungan Labubu', reward: 1000, link: 'https://s.shopee.co.id/1LVBM7pHMV' },
+            { id: 514, category: 'afiliasi', icon: '🍲', title: 'Baso Aci instan paket 10pcs', reward: 1000, link: 'https://s.shopee.co.id/3qCWKiflI0' },
+            { id: 515, category: 'afiliasi', icon: '🍜', title: 'Seblak Instan komplit extra pedas', reward: 1000, link: 'https://s.shopee.co.id/3ft68PgOcz' },
+            { id: 516, category: 'afiliasi', icon: '🖊️', title: 'Paket 1 Lusin Pulpen Gel', reward: 1000, link: 'https://s.shopee.co.id/3VZfw6h1xy' },
+            { id: 517, category: 'afiliasi', icon: '🎒', title: 'Tas Ransel PAKET COMBO Kuromi', reward: 1000, link: 'https://s.shopee.co.id/3LGFjnhfIx' },
+            { id: 518, category: 'afiliasi', icon: '🧕', title: 'Mukena Traveling Mini pouch 2in1', reward: 1000, link: 'https://s.shopee.co.id/3AwpXUiIdw' },
+            { id: 519, category: 'afiliasi', icon: '👗', title: 'Promo Daster Resleting Termurah', reward: 1000, link: 'https://s.shopee.co.id/30dPLBivyv' },
+            { id: 520, category: 'afiliasi', icon: '🌧️', title: 'AKULA Jas Hujan Raincoat Pria Wanita', reward: 1000, link: 'https://s.shopee.co.id/2qJz8sjZJu' }
         ];
 
-        let user = JSON.parse(localStorage.getItem('nabilaUserProfileV3')) || {
+        let user = JSON.parse(localStorage.getItem('nabilaUserProfileV4')) || {
             name: "Pengguna " + Math.floor(1000 + Math.random() * 9000), balance: 0, completedTaskIds: []
         };
         
-        const saveUser = () => localStorage.setItem('nabilaUserProfileV3', JSON.stringify(user));
+        const saveUser = () => localStorage.setItem('nabilaUserProfileV4', JSON.stringify(user));
         const formatRupiah = (number) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(number);
 
         function updateUI() {
@@ -259,7 +287,7 @@
         function renderTasks(category, container) {
             if (!container) return;
             container.innerHTML = '';
-            availableTasks.filter(t => t.category === category).forEach(task => {
+            allTasks.filter(t => t.category === category).forEach(task => {
                 const isCompleted = user.completedTaskIds.includes(task.id);
                 const taskCard = document.createElement('div');
                 taskCard.className = 'task-card';
@@ -280,7 +308,7 @@
 
         function completeTask(taskId) {
             if (user.completedTaskIds.includes(taskId)) return;
-            const task = availableTasks.find(t => t.id === taskId);
+            const task = allTasks.find(t => t.id === taskId);
             if(task) {
                 user.balance += task.reward;
                 user.completedTaskIds.push(taskId);
@@ -291,13 +319,14 @@
         };
         
         document.body.addEventListener('click', e => {
-            const subscribeBtn = e.target.closest('#subscribe-btn');
-            const continueBtn = e.target.closest('#continue-btn');
-            const taskButton = e.target.closest('.task-action button');
-            const navWithdrawBtn = e.target.closest('#nav-withdraw-btn');
-            const requestWdBtn = e.target.closest('#request-wd-btn');
-            const cancelWdBtn = e.target.closest('#cancel-wd-btn');
-            const menuToggle = e.target.closest('#menu-toggle');
+            const target = e.target;
+            const subscribeBtn = target.closest('#subscribe-btn');
+            const continueBtn = target.closest('#continue-btn');
+            const taskButton = target.closest('.task-action button');
+            const navWithdrawBtn = target.closest('#nav-withdraw-btn');
+            const requestWdBtn = target.closest('#request-wd-btn');
+            const cancelWdBtn = target.closest('#cancel-wd-btn');
+            const menuToggle = target.closest('#menu-toggle');
 
             if (subscribeBtn) window.open(config.youtubeChannel, '_blank');
             if (continueBtn) {
@@ -307,7 +336,7 @@
             }
             if (taskButton) {
                  const taskId = parseInt(taskButton.dataset.taskId);
-                 const task = availableTasks.find(t => t.id === taskId);
+                 const task = allTasks.find(t => t.id === taskId);
                  if (task.special_action === 'referral') {
                     const code = task.referral_code;
                     if(confirm(`Kunjungi link, lalu masukan kode:\n\n${code}\n\nKlik OK untuk menyalin kode & membuka link.`)){
